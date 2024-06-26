@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  mydb:
+    container_name: mydb
+    image: postgres
+    environment:
+      POSTGRES_DB: ClockInSystemDB
+      POSTGRES_USER: kdanmobile
+      POSTGRES_PASSWORD: password
+    ports:
+    #外部：內部
+      - "5432:5432"
+  myserver:
+    container_name: myserver
+    build: ./backend
+    ports:
+      - "4000:4000"
+    environment:
+    # localhost
+      DB_USER: kdanmobile
+      DB_PASSWORD: password
+      DB_HOST: mydb
+      DB_PORT: 5432
+      DB_DATABASE: ClockInSystemDB
+    depends_on:
+      - mydb
+    # networks:
+    #   - my-network
+  myweb:
+    container_name: myweb
+    build: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - myserver
+    # networks:
+    #   - my-network
+# networks:
+#   my-network:
+ 

@@ -1,0 +1,14 @@
+# Ignore Node.js modules
+node_modules
+
+# Ignore development files
+.DS_Store
+*.log
+*.tmp
+*.bak
+
+.env
+
+# Ignore Git related files
+.git
+.gitignore
